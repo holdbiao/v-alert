@@ -7,6 +7,7 @@
 
 <script>
 import alert from './alert/alert'
+
 export default {
   name: 'app',
   components: {
