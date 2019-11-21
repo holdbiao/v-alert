@@ -15,19 +15,26 @@ export default {
   },
   methods: {
     handleTest () {
-      // // 方法一
-      // this.$alert.show({text: '测试内容', cancel: '关闭', confirm: '好的'}).then(res => {
+      // 方法一
+      this.$alert.show({text: '测试内容', cancel: '关闭', confirm: '好的'}).then(res => {
+        console.log('你点击了确定')
+      }).catch(err => {
+        console.log('你点击了取消')
+      })
+
+      // // 方法二
+      // this.$alert.show('只有文字').then(res => {
       //   console.log('你点击了确定')
       // }).catch(err => {
       //   console.log('你点击了取消')
       // })
 
-      // 方法二
-      this.$alert.show('只有文字').then(res => {
-        console.log('你点击了确定')
-      }).catch(err => {
-        console.log('你点击了取消')
-      })
+      // // 方法三
+      // this.$alert.show().then(res => {
+      //   console.log('你点击了确定')
+      // }).catch(err => {
+      //   console.log('你点击了取消')
+      // })
     }
   }
 }
