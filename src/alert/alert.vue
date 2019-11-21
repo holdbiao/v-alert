@@ -3,10 +3,10 @@
     <div class="biu-alert-wrapper" v-show="show">
       <transition name="show">
         <div class="biu-alert-main" v-show="show">
-          <div class="biu-alert-text">{{content}}</div>
+          <div class="biu-alert-text">{{text}}</div>
           <div class="biu-btn-cont">
-            <button @click="cancel">取消</button>
-            <button @click="confirm">确定</button>
+            <button @click="handelCancel">{{cancelText}}</button>
+            <button @click="handelConfirm">{{confirmText}}</button>
           </div>
         </div>
       </transition>
@@ -17,9 +17,11 @@
 export default {
   data () {
     return {
-      content: '',
+      text: '',
       promise: null,
-      show: false
+      show: false,
+      cancelText: '',
+      confirmText: ''
     }
   },
   methods: {
@@ -29,11 +31,11 @@ export default {
         this.promise = { resolve, reject }
       })
     },
-    cancel () {
+    handelCancel () {
       this.promise.reject()
       this.destroyVm()
     },
-    confirm () {
+    handelConfirm () {
       this.promise.resolve()
       this.destroyVm()
     },
@@ -41,7 +43,7 @@ export default {
       this.show = false
       setTimeout(() => { // 动画完成后执行
         this.$destroy(true) // 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
-        this.$el.parentNode.removeChild(this.$el) // 从dom节点删除
+        this.$el && this.$el.parentNode.removeChild(this.$el) // 从dom节点删除
       }, 500)
     }
   }
@@ -63,7 +65,7 @@ export default {
     padding: 20px;
     background-color: #fff;
     .biu-alert-text {
-      padding: 10px;
+      padding: 10px 0;
     }
   }
   .show-enter-active, .show-leave-active {
